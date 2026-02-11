@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            font-family: cursive;
+            background-color: rgb(255, 255, 255);
+        }
+        h1{
+           font-family: fantasy;
+        }
+    </style>
+</head>
+<body>
+    <h1>URL SHORTENER</h1>
+    <div>
+        <form action="/url" method="post">
+            <label for="">Enter Your Original URL</label>
+            <input type="text" name="url" placeholder="https://www.google.com">
+            <button type="submit">Shorten</button>
+        </form>
+    </div>
+
+    <% if (locals.Id) { %>
+        <p>Url Generated: http://localhost:7310/u/<%= locals.Id %>
+        </p>
+    <% } %>
+    <% if (locals.Urls && locals.Urls.length > 0) { %>
+     <table>
+        <tr>
+        <thead>
+           <th>Sr No.</th>
+           <th>short id</th>
+           <th>Original URL</th>
+           <th>Clicks</th>
+        </thead>
+        <tbody>
+          <% locals.Urls.forEach((url, index) => { %>
+            <tr>
+              <td><%= index + 1 %></td>
+              <td><%= url.shortId %></td>
+              <td><%= url.originalUrl %></td>
+              <td><%= url.visitHistory.length %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+        </tr>
+     </table>
+    <% } %>
+</body>
+</html>
