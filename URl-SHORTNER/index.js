@@ -5,21 +5,24 @@ const { connecttoDB } = require('./connect.js');
 const urlRouter = require('./routes/url.js');
 const staticRoute = require('./routes/staticRouter.js');
 const userRouter = require('./routes/user.js');
+
 const URL = require('./models/url.js');
-const {restrictToUserLoginOnly,checkAuth} = require('./middleware/auth.js');
+const { checkForAuthentication, restrictTo } = require('./middleware/auth.js');
+const router = require('./routes/url.js');
 
 const app = express();
 const port = 7310;
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(checkForAuthentication);
 
 app.set('view engine', "ejs");
 app.set('views', path.resolve("./views"));
 
-app.use('/', checkAuth, staticRoute);
-app.use('/url',restrictToUserLoginOnly, urlRouter);
+app.use('/',  staticRoute);
+app.use('/url',restrictTo(["NORMAL","ADMIN"]), urlRouter);
 app.use('/user', userRouter);   
 
 app.get('/u/:shortId', async (req, res) => {
