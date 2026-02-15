@@ -5,8 +5,10 @@ This repository contains my backend practice and portfolio projects built using 
 Projects
 
 1. URL Shortener
+2. Bank System
 
 Basic CRUD URL shortener backend with database integration.
+Kinda advance level CRUD with Authentication,Authorization and database Integration.
 
 More backend projects will be added here:
 
