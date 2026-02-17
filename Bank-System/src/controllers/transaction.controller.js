@@ -126,7 +126,7 @@ async function createTransaction(req, res) {
 
     return res.status(201).json({
         message: "Transaction completed successfully",
-        transaction: transaction
+        transaction: transaction,
     })
 
 }

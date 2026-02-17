@@ -1,7 +1,8 @@
-const userModel = require('../models/user.models');
-const accountModel = require('../models/account.model'); // ✅ Account model
+const userModel = require('../models/user.model');
+const accountModel = require('../models/account.model'); 
 const jwt = require("jsonwebtoken");
 const emailService = require("../services/email.service");
+const tokenBlacklistModel = require('../models/blackList.model');
 
 async function userRegisterController(req, res) {
     try {
@@ -67,15 +68,13 @@ async function userLoginController(req, res) {
             return res.status(401).json({ message: "Email or password is invalid" });
         }
 
-        // Generate JWT token
         const token = jwt.sign(
             { userId: user._id },
             process.env.JWT_SECRET,
             { expiresIn: "3d" }
         );
 
-        // Set token cookie
-        res.cookie("token", token, { httpOnly: true, maxAge: 3 * 24 * 60 * 60 * 1000 });
+        res.cookie("token", token, { httpOnly: true, maxAge: 3 * 24 * 60 * 60 * 1000 }); 
 
         res.status(200).json({
             user: {
@@ -95,7 +94,27 @@ async function userLoginController(req, res) {
     }
 }
 
+async function userLogoutController(req, res) {
+    const token = req.cookies.token || req.headers.authorization?.split(" ")[1]
+
+    if(!token) {
+        return res.status(400).json({
+            message : "User Logout Successfuly"
+        })
+    }
+
+    res.cookie('token', "")
+
+    await tokenBlacklistModel.create({
+        token:token
+    })
+
+    res.status(200).json({
+        message: "User logout sucessfully"
+    })
+}
 module.exports = {
     userRegisterController,
     userLoginController,
+    userLogoutController
 };
