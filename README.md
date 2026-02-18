@@ -6,9 +6,7 @@ Projects
 
 1. URL Shortener
 2. Bank System
-
-Basic CRUD URL shortener backend with database integration.
-Kinda advance level CRUD with Authentication,Authorization and database Integration.
+3. Real time location tracker
 
 More backend projects will be added here:
 
