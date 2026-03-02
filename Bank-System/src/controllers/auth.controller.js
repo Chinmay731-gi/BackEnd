@@ -8,18 +8,17 @@ async function userRegisterController(req, res) {
     try {
         const { email, name, password } = req.body;
 
-        const isExists = await userModel.findOne({ email });
+        const isExists = await userModel.findOne({ email});
         if (isExists) {
-            return res.status(422).json({
-                message: "Email already exists",
-                status: "Failed"
-            });
+          req.flash("error", "User already exists");
+          return res.redirect("/api/auth/login?error=User already exists. Please Login");
         }
 
         const user = await userModel.create({ email, name, password });
 
         const account = await accountModel.create({
             user: user._id,
+            number: Math.floor(1000000000 + Math.random() * 9000000000).toString(),
             status: "ACTIVE",
             currency: "INR",
             balance: 0 
@@ -32,24 +31,18 @@ async function userRegisterController(req, res) {
         );
         res.cookie("token", token, { httpOnly: true, maxAge: 3 * 24 * 60 * 60 * 1000 }); 
 
-        res.status(201).json({
-            user: {
-                _id: user._id,
-                email: user.email,
-                name: user.name
-            },
-            account,
-            token
-        });
-
+        res.status(201).redirect("/api/homels")
+       try {
         await emailService.sendRegistrationEmail(user.email, user.name);
+       } catch (error) {
+        console.error(error);
+       }
+        
 
     } catch (err) {
-        console.error("Registration error:", err);
-        res.status(500).json({
-            message: "Internal server error",
-            status: "Failed"
-        });
+        console.log(err);
+        req.flash("error", "Registration error");
+        return res.redirect("/api/auth/register?error=Registration error, please try later");
     }
 }
 
@@ -60,12 +53,14 @@ async function userLoginController(req, res) {
         const user = await userModel.findOne({ email }).select("+password");
 
         if (!user) {
-            return res.status(401).json({ message: "Email or password is invalid" });
+            req.flash("error", "User does not exists");
+            return res.redirect("/api/auth/login?error=User does not exists. Please Signup");
         }
 
         const isValidPassword = await user.comparePassword(password);
         if (!isValidPassword) {
-            return res.status(401).json({ message: "Email or password is invalid" });
+            req.flash("error", "User does not exists");
+            return res.redirect("/api/auth/login?error=Password is incorrect.");
         }
 
         const token = jwt.sign(
@@ -76,21 +71,11 @@ async function userLoginController(req, res) {
 
         res.cookie("token", token, { httpOnly: true, maxAge: 3 * 24 * 60 * 60 * 1000 }); 
 
-        res.status(200).json({
-            user: {
-                _id: user._id,
-                email: user.email,
-                name: user.name
-            },
-            token
-        });
+        res.status(200).redirect("/api/homels")
 
     } catch (err) {
-        console.error("Login error:", err);
-        res.status(500).json({
-            message: "Internal server error",
-            status: "Failed"
-        });
+        req.flash("error", "Login error");
+        return res.redirect("/api/auth/login?error=Login error, please try later");
     }
 }
 
@@ -98,9 +83,8 @@ async function userLogoutController(req, res) {
     const token = req.cookies.token || req.headers.authorization?.split(" ")[1]
 
     if(!token) {
-        return res.status(400).json({
-            message : "User Logout Successfuly"
-        })
+        req.flash("error", "logout successfull");
+        return res.redirect("/api/auth/login?error=Logout successful");
     }
 
     res.cookie('token', "")
@@ -109,9 +93,7 @@ async function userLogoutController(req, res) {
         token:token
     })
 
-    res.status(200).json({
-        message: "User logout sucessfully"
-    })
+    res.status(200).redirect("login")
 }
 module.exports = {
     userRegisterController,
