@@ -10,13 +10,13 @@ Projects
 4. WAA
 
 More backend projects will be added here:
-
-`- Blog API
+`
+- Blog API
 - Authentication system
 - Real-time chat
 - Social media backend
 - AI-integrated backend
-- Many more`
-
-  ---
-Each project is inside its own folder.
+- Many more
+`
+---
+**Each project is inside its own folder.**
