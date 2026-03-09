@@ -1,4 +1,4 @@
-Backend Projects Collection 🚀
+# Backend Projects Collection 🚀
 
 This repository contains my backend practice and portfolio projects built using Node.js, Express, and MongoDB.
 
@@ -7,13 +7,14 @@ Projects
 1. URL Shortener
 2. Bank System
 3. Real time location tracker
+4. WAA
 
 More backend projects will be added here:
 
-- Blog API
+`- Blog API
 - Authentication system
 - Real-time chat
 - Social media backend
 - AI-integrated backend
-- Many more
+- Many more`
 Each project is inside its own folder.
