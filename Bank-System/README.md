@@ -1,64 +1,41 @@
-💳 Advanced Bank System Backend
+# 💳 Advanced Bank System Backend
 
 A production-style banking backend API that simulates real-world digital banking features like user accounts, secure balance transfers, transaction history, and email notifications. Built with a scalable architecture and clean modular structure using Node.js, Express, and MongoDB.
 
----
+## 🌐 Live API
 
-🌐 Live API
 Base URL:
-
 https://bank-backend-system.onrender.com
 
-Example API:
-
-<<<<<<< HEAD
+Example API Endpoints:
+`
 POST /api/auth/register
 POST /api/auth/login
 POST /api/transfer
-=======
-POST /api/auth/register 
-
-POST /api/auth/login
-
-POST /api/transfer
-
->>>>>>> a739787 (Complete Bank System Project)
 GET  /api/transactions
+`
 
----
+## 🚀 Features
 
-🚀 Features
+🔐 User Authentication: JWT-based authentication with hashed passwords
 
-🔐 User authentication (JWT + hashed passwords)
+👤 User Management: Registration and login
 
-👤 User registration & login
+💰 Secure Transfers: Money transfer between users
 
-💰 Secure money transfer between users
+📜 Transaction History: Track all transactions
 
-📜 Transaction history tracking
+📧 Email Notifications: Send email after successful transfer
 
-📧 Email notification after successful transfer
+🧾 Balance Management: Check and manage user balance
 
-🧾 Balance management system
+🛡 Validation & Error Handling: Centralized and secure
 
-🛡 Input validation & centralized error handling
+🧱 Modular MVC Architecture: Scalable folder structure
 
-🧱 Modular MVC architecture
-
-🌐 RESTful API design
-
-🚀 Deployment-ready backend
-
-<<<<<<< HEAD
-=======
-🖥️ UI
->>>>>>> a739787 (Complete Bank System Project)
-
----
+🌐 RESTful API Design: Clean and production-ready
 
 🛠 Tech Stack
-<<<<<<< HEAD
-=======
 
 Node.js
 
@@ -72,34 +49,28 @@ Nodemailer
 
 Git & GitHub
 
-
----
-
-📂 Project Structure
-
+## 📂 Project Structure
 src/
- ├── controllers/
- ├── models/
- ├── routes/
- ├── middleware/
- ├── services/
- └── app.js
+ ├── controllers/      # API logic
+ ├── models/           # Database schemas
+ ├── routes/           # API endpoints
+ ├── middleware/       # Auth & error handling
+ ├── services/         # Email & other services
+ └── app.js            # Main server
 
-Clean and scalable folder structure following real-world backend practices.
-views to be added with basic, user-friendly UI.
----
+Views will be added later to provide a basic, user-friendly UI.
 
-🔑 Core API Modules
+## 🔑 Core API Modules
 
-Auth
+Auth Module
 
-Register user
+User registration
 
-Login user
+User login
 
-JWT-based authentication
+JWT authentication
 
-Banking
+Banking Module
 
 Create account
 
@@ -111,49 +82,31 @@ Transaction history
 
 Services
 
-Email notification after transfer
+Email notifications after transfers
 
 Global error handling
-
-
----
 
 ⚙️ Environment Variables
 
 Create a .env file in the root:
 
 PORT=7310
-
 MONGO_URI=your_mongodb_connection
-
 JWT_SECRET=your_jwt_secret
-
-CLIET_ID = your client id
-
-CLIENT_SECRET= your client secret
-
-REFRESH_TOKEN = refresh token
-
+CLIENT_ID=your_client_id
+CLIENT_SECRET=your_client_secret
+REFRESH_TOKEN=your_refresh_token
 EMAIL_USER=your_email
 
-
----
-
-▶️ Run Locally
-
+## ▶️ Run Locally
 git clone https://github.com/Chinmay731-gi/bank-system-backend.git
 cd bank-system-backend
 npm install
 npm run dev
 
-Server runs on:
+Server will run on: http://localhost:7310
 
-http://localhost:7310
-
-
----
-
-🧠 Purpose of Project
+## 🧠 Purpose of the Project
 
 This project was built to simulate a real-world banking backend and demonstrate skills in:
 
@@ -167,30 +120,22 @@ API design
 
 Scalable folder structure
 
+## 🔮 Future Improvements
 
----
-
-🔮 Future Improvements
-
-Rate limiting
+Rate limiting & security enhancements
 
 Redis caching
 
-Docker setup
+Docker containerization
 
-WebSocket live updates
+WebSocket for live updates
 
 Admin panel
 
-Unit testing
+Unit testing & CI/CD integration
 
 Payment gateway integration
 
+## 👨‍💻 Author
 
----
-
-👨‍💻 Author
-
-Chinmay Ihare
-Backend Developer (1st year) focused on building scalable real-world backend systems.
->>>>>>> a739787 (Complete Bank System Project)
+`Chinmay Ihare, Backend Developer (1st year), focused on building scalable real-world backend systems.`
