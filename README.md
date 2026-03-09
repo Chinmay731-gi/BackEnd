@@ -11,7 +11,6 @@ Projects
 
 More backend projects will be added here:
 
-`
 - Blog API
 - Authentication system
 - Real-time chat
@@ -19,6 +18,5 @@ More backend projects will be added here:
 - AI-integrated backend
 - Many more
 
-`
 ---
 **Each project is inside its own folder.**
