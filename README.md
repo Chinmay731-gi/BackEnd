@@ -17,4 +17,6 @@ More backend projects will be added here:
 - Social media backend
 - AI-integrated backend
 - Many more`
+
+  ---
 Each project is inside its own folder.
